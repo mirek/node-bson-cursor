@@ -1,6 +1,4 @@
 
-{ CStringRef } = require './buffer-reader/cstringref'
-
 # BufferReader wraps buffer and provides fast reading routines.
 #
 # Overflow checks are not performed. It's user responsiblity to guarantee that the buffer is well formed bson.
@@ -77,5 +75,4 @@ class BufferReader
 
 module.exports = {
   BufferReader
-  CStringRef
 }

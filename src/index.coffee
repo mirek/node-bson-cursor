@@ -1,7 +1,7 @@
 
 assert = require 'assert'
 { TypeCode, SubTypeCode, TypeCodeToName, SubTypeCodeToName } = require './codes'
-{ BufferReader, CStringRef } = require './buffer-reader'
+{ BufferReader } = require './buffer-reader'
 { binsert } = require 'barray'
 
 Key =

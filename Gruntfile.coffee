@@ -1,10 +1,14 @@
 
 module.exports = (grunt) ->
+  grunt.loadNpmTasks 'grunt-contrib-clean'
   grunt.loadNpmTasks 'grunt-contrib-coffee'
   grunt.loadNpmTasks 'grunt-mocha-test'
 
   grunt.initConfig
     pkg: grunt.file.readJSON 'package.json'
+
+    clean:
+      lib: 'lib'
 
     coffee:
       compile:
@@ -29,5 +33,5 @@ module.exports = (grunt) ->
         src: [ 'spec/**/*.coffee' ]
 
   grunt.registerTask 'test', [ 'mochaTest' ]
-  grunt.registerTask 'compile', [ 'coffee' ]
+  grunt.registerTask 'compile', [ 'clean:lib', 'coffee' ]
   grunt.registerTask 'default', [ 'compile' ]

@@ -34,6 +34,7 @@
     "flat-flow": "^0.1.1",
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
+    "grunt-contrib-clean": "^0.6.0",
     "grunt-contrib-coffee": "^0.12.0",
     "grunt-mocha-test": "^0.12.1",
     "longjohn": "^0.2.4",

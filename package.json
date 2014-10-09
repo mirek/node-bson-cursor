@@ -29,7 +29,12 @@
   },
   "devDependencies": {
     "async": "^0.9.0",
+    "coffee-script": "^1.8.0",
     "flat-flow": "^0.1.1",
+    "grunt": "^0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-coffee": "^0.12.0",
+    "grunt-mocha-test": "^0.12.1",
     "longjohn": "^0.2.4",
     "mocha": "^1.21.4",
     "mongodb": "^1.4.19"

@@ -1,6 +1,6 @@
 {
   "name": "bson-cursor",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Fast BSON traversal",
   "main": "lib/index.js",
   "scripts": {

@@ -6,6 +6,22 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mirek/node-bson-cursor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mirek/node-bson-cursor/issues"
+  },
+  "homepage": "https://github.com/mirek/node-bson-cursor",
+  "keywords": [
+    "bson",
+    "fast",
+    "mongodb",
+    "raw",
+    "structure",
+    "schema"
+  ],
   "author": "Mirek Rusin http://github.com/mirek",
   "license": "MIT",
   "dependencies": {

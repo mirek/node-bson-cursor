@@ -29,6 +29,7 @@
   },
   "devDependencies": {
     "async": "^0.9.0",
+    "bson": "^0.2.15",
     "coffee-script": "^1.8.0",
     "flat-flow": "^0.1.1",
     "grunt": "^0.4.5",

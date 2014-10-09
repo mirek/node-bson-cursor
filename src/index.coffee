@@ -1,39 +1,44 @@
 
+assert = require 'assert'
 { TypeCode, SubTypeCode, TypeCodeToName, SubTypeCodeToName } = require './codes'
 { BufferReader, CStringRef } = require './buffer-reader'
 { binsert } = require 'barray'
 
-structify = (rd, arr = false, meta = {}) ->
-  # assert buf.length, rd.readInt32LE()
+Key =
+  Type: '_types'
+
+# @param [BufferReader] bf
+# @param [Boolean] arr Is the value an array
+# @param [Object] meta output meta info
+structify = (rd, arr, meta = {}) ->
   clen = rd.readInt32LE()
-  stop = false
+  # assert buf.length, clen
 
-  # console.log { clen }
+  binsert (meta[Key.Type] ?= []), (if arr then 'Array' else 'Object')
 
-  binsert (meta['@type'] ?= []), (if arr then 'Array' else 'Object')
-
-  # o = []
-  # bson.BSON.deserialize buf, i, 1, o, {}
-
+  # Stop if we're at the end of stream or
   loop
-    break if rd.eof or (eType = rd.readInt8()) is 0
-    eNameRange = rd.readRangeUntil 0
 
+    break if rd.eof or (eType = rd.readInt8()) is 0
+
+    # Get type name
     eTypeName = TypeCodeToName[eType]
 
-    # In meta structure we refer to array elements with index 0 only.
+    # Read name as range
+    eNameRange = rd.readRangeUntil 0
+
+    # In meta structure we refer to an array elements as index 0 only.
     if arr
       eName = 0
     else
       eName = rd.rangeToCString eNameRange
 
     eMeta = meta[eName] ?= {}
-    eMetaType = eMeta['@type'] ?= []
+    eMetaType = eMeta[Key.Type] ?= []
     binsert eMetaType, eTypeName
 
-    # console.log { eName, eTypeName, eType }
-    assert eType != 0
-    assert eTypeName?
+    # assert eType != 0
+    # assert eTypeName?
 
     switch eType
 
@@ -43,7 +48,6 @@ structify = (rd, arr = false, meta = {}) ->
       when TypeCode.String
         len = rd.readInt32LE()
         range = rd.readRange len
-        # console.log { len, range }
 
       when TypeCode.Object
         structify rd, false, eMeta
@@ -75,14 +79,14 @@ structify = (rd, arr = false, meta = {}) ->
         rd.readRangeUntil 0
         rd.readRangeUntil 0
 
-      when TypeCode.DBPointer
+      when TypeCode.DBPointer # deprecated
         rd.skip rd.readInt32LE()
         rd.skip 12
 
       when TypeCode.JS
         rd.skip rd.readInt32LE()
 
-      when TypeCode._0x0E
+      when TypeCode._0x0E # deprecated
         rd.skip rd.readInt32LE()
 
       when TypeCode.ScopedJS
@@ -105,4 +109,5 @@ structify = (rd, arr = false, meta = {}) ->
 
 module.exports = {
   structify
+  BufferReader
 }

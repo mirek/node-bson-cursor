@@ -1,5 +1,5 @@
 
-## Summary
+## Summary [![Build Status](//travis-ci.org/mirek/node-bson-cursor.png?branch=master)](https://travis-ci.org/mirek/node-bson-cursor)
 
 BSON cursor provides fast traversal/reads on well formed bson documents.
 
